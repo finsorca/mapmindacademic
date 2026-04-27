@@ -6,340 +6,148 @@
 <title>MapMind Academic Services</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --ink:#0f1a14;--paper:#f5f0e8;--gold:#b8902a;--gold-light:#e8d5a0;
+  --moss:#1c3d2a;--moss-mid:#2e5c40;--moss-light:#e8f0eb;--cream:#faf7f1;
+  --text-muted:#5a6b5f;
+}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden;}
 
-  :root {
-    --ink: #0f1a14;
-    --paper: #f5f0e8;
-    --gold: #b8902a;
-    --gold-light: #e8d5a0;
-    --moss: #1c3d2a;
-    --moss-mid: #2e5c40;
-    --moss-light: #e8f0eb;
-    --cream: #faf7f1;
-    --text-muted: #5a6b5f;
-  }
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(245,240,232,0.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--gold-light);padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:64px;}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--moss);}
+.nav-logo span{color:var(--gold);}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{font-size:0.875rem;font-weight:500;color:var(--text-muted);text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover{color:var(--moss);}
+.nav-cta{background:var(--moss);color:#fff!important;padding:0.45rem 1.1rem;border-radius:4px;}
 
-  html { scroll-behavior: smooth; }
+/* HERO */
+.hero{min-height:100vh;background:var(--moss);display:flex;align-items:center;padding:100px 5% 80px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 80% 50%,rgba(184,144,42,0.12) 0%,transparent 60%);}
+.hero-grid{position:absolute;inset:0;opacity:0.04;background-image:linear-gradient(var(--gold) 1px,transparent 1px),linear-gradient(90deg,var(--gold) 1px,transparent 1px);background-size:60px 60px;}
+.hero-content{position:relative;max-width:680px;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(184,144,42,0.15);border:1px solid rgba(184,144,42,0.3);color:var(--gold-light);font-size:0.78rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;padding:6px 14px;border-radius:2px;margin-bottom:1.8rem;animation:fadeUp 0.6s ease both;}
+.hero-badge::before{content:'●';font-size:8px;}
+h1{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,6vw,4.5rem);font-weight:700;line-height:1.08;color:var(--paper);margin-bottom:1.5rem;animation:fadeUp 0.6s 0.1s ease both;}
+h1 em{color:var(--gold);font-style:normal;}
+.hero-sub{font-size:1.1rem;font-weight:300;line-height:1.75;color:rgba(245,240,232,0.75);max-width:520px;margin-bottom:2.5rem;animation:fadeUp 0.6s 0.2s ease both;}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;animation:fadeUp 0.6s 0.3s ease both;}
+.btn-primary{background:var(--gold);color:var(--moss);padding:0.85rem 2rem;border-radius:4px;font-weight:600;font-size:0.95rem;text-decoration:none;transition:transform 0.15s,background 0.15s;display:inline-flex;align-items:center;gap:8px;}
+.btn-primary:hover{background:#cfa036;transform:translateY(-1px);}
+.btn-ghost{background:transparent;color:var(--paper);border:1px solid rgba(245,240,232,0.35);padding:0.85rem 2rem;border-radius:4px;font-weight:400;font-size:0.95rem;text-decoration:none;transition:border-color 0.15s;}
+.btn-ghost:hover{border-color:var(--gold-light);}
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--cream);
-    color: var(--ink);
-    overflow-x: hidden;
-  }
+/* STATS */
+.stats-strip{background:var(--gold);padding:1.2rem 5%;display:flex;justify-content:center;gap:4rem;flex-wrap:wrap;}
+.stat-item{text-align:center;}
+.stat-num{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:var(--moss);}
+.stat-label{font-size:0.78rem;font-weight:500;color:rgba(15,26,20,0.65);text-transform:uppercase;letter-spacing:0.06em;}
 
-  /* ── NAV ── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    background: rgba(245,240,232,0.95);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--gold-light);
-    padding: 0 5%;
-    display: flex; align-items: center; justify-content: space-between;
-    height: 64px;
-  }
-  .nav-logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.2rem; font-weight: 700;
-    color: var(--moss);
-    letter-spacing: -0.01em;
-  }
-  .nav-logo span { color: var(--gold); }
-  .nav-links { display: flex; gap: 2rem; list-style: none; }
-  .nav-links a {
-    font-size: 0.875rem; font-weight: 500;
-    color: var(--text-muted); text-decoration: none;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--moss); }
-  .nav-cta {
-    background: var(--moss);
-    color: #fff !important;
-    padding: 0.45rem 1.1rem;
-    border-radius: 4px;
-    font-weight: 500 !important;
-  }
-  .nav-cta:hover { background: var(--moss-mid); color: #fff !important; }
+/* SECTIONS */
+section{padding:90px 5%;}
+.section-tag{font-size:0.75rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:0.75rem;}
+h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,2.8rem);font-weight:700;line-height:1.15;color:var(--moss);margin-bottom:1.2rem;}
+.section-intro{font-size:1rem;font-weight:300;line-height:1.8;color:var(--text-muted);max-width:560px;}
 
-  /* ── HERO ── */
-  .hero {
-    min-height: 100vh;
-    background: var(--moss);
-    display: flex; align-items: center;
-    padding: 100px 5% 80px;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero::before {
-    content: '';
-    position: absolute; inset: 0;
-    background:
-      radial-gradient(ellipse 60% 80% at 80% 50%, rgba(184,144,42,0.12) 0%, transparent 60%),
-      radial-gradient(ellipse 40% 60% at 10% 80%, rgba(255,255,255,0.04) 0%, transparent 50%);
-  }
-  .hero-grid {
-    position: absolute; inset: 0; opacity: 0.04;
-    background-image: linear-gradient(var(--gold) 1px, transparent 1px), linear-gradient(90deg, var(--gold) 1px, transparent 1px);
-    background-size: 60px 60px;
-  }
-  .hero-content { position: relative; max-width: 680px; }
-  .hero-badge {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: rgba(184,144,42,0.15);
-    border: 1px solid rgba(184,144,42,0.3);
-    color: var(--gold-light);
-    font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
-    padding: 6px 14px; border-radius: 2px;
-    margin-bottom: 1.8rem;
-    animation: fadeUp 0.6s ease both;
-  }
-  .hero-badge::before { content: '●'; font-size: 8px; }
-  h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2.8rem, 6vw, 4.5rem);
-    font-weight: 700; line-height: 1.08;
-    color: var(--paper);
-    margin-bottom: 1.5rem;
-    animation: fadeUp 0.6s 0.1s ease both;
-  }
-  h1 em { color: var(--gold); font-style: normal; }
-  .hero-sub {
-    font-size: 1.1rem; font-weight: 300; line-height: 1.75;
-    color: rgba(245,240,232,0.75);
-    max-width: 520px;
-    margin-bottom: 2.5rem;
-    animation: fadeUp 0.6s 0.2s ease both;
-  }
-  .hero-actions {
-    display: flex; gap: 1rem; flex-wrap: wrap;
-    animation: fadeUp 0.6s 0.3s ease both;
-  }
-  .btn-primary {
-    background: var(--gold);
-    color: var(--moss);
-    padding: 0.85rem 2rem;
-    border-radius: 4px;
-    font-weight: 600; font-size: 0.95rem;
-    text-decoration: none;
-    transition: transform 0.15s, background 0.15s;
-    display: inline-flex; align-items: center; gap: 8px;
-  }
-  .btn-primary:hover { background: #cfa036; transform: translateY(-1px); }
-  .btn-ghost {
-    background: transparent;
-    color: var(--paper);
-    border: 1px solid rgba(245,240,232,0.35);
-    padding: 0.85rem 2rem;
-    border-radius: 4px;
-    font-weight: 400; font-size: 0.95rem;
-    text-decoration: none;
-    transition: border-color 0.15s, background 0.15s;
-  }
-  .btn-ghost:hover { border-color: var(--gold-light); background: rgba(255,255,255,0.05); }
+/* SERVICES */
+#services{background:var(--cream);}
+.services-header{margin-bottom:4rem;}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;}
+.service-card{background:#fff;border:1px solid var(--gold-light);border-radius:6px;padding:2.2rem;position:relative;transition:box-shadow 0.2s,transform 0.2s;overflow:hidden;}
+.service-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform 0.3s;}
+.service-card:hover{box-shadow:0 8px 32px rgba(15,26,20,0.08);transform:translateY(-3px);}
+.service-card:hover::after{transform:scaleX(1);}
+.service-icon{width:48px;height:48px;background:var(--moss-light);border-radius:6px;display:flex;align-items:center;justify-content:center;margin-bottom:1.4rem;}
+.service-icon svg{width:24px;height:24px;}
+.service-card h3{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:600;color:var(--moss);margin-bottom:0.75rem;}
+.service-card p{font-size:0.925rem;font-weight:300;line-height:1.75;color:var(--text-muted);margin-bottom:1.4rem;}
+.service-tags{display:flex;gap:0.5rem;flex-wrap:wrap;}
+.tag{background:var(--moss-light);color:var(--moss-mid);font-size:0.72rem;font-weight:500;letter-spacing:0.04em;padding:4px 10px;border-radius:2px;}
 
-  /* ── STATS STRIP ── */
-  .stats-strip {
-    background: var(--gold);
-    padding: 1.2rem 5%;
-    display: flex; justify-content: center; gap: 4rem; flex-wrap: wrap;
-  }
-  .stat-item { text-align: center; }
-  .stat-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.6rem; font-weight: 700; color: var(--moss);
-  }
-  .stat-label { font-size: 0.78rem; font-weight: 500; color: rgba(15,26,20,0.65); text-transform: uppercase; letter-spacing: 0.06em; }
+/* PROCESS */
+#process{background:var(--moss);}
+#process h2{color:var(--paper);}
+#process .section-intro{color:rgba(245,240,232,0.65);}
+.steps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;margin-top:3.5rem;border:1px solid rgba(184,144,42,0.2);border-radius:6px;overflow:hidden;}
+.step{padding:2.2rem;border-right:1px solid rgba(184,144,42,0.2);}
+.step:last-child{border-right:none;}
+.step-num{font-family:'Playfair Display',serif;font-size:3rem;font-weight:700;color:rgba(184,144,42,0.2);line-height:1;margin-bottom:1rem;}
+.step h4{font-size:1rem;font-weight:600;color:var(--gold-light);margin-bottom:0.6rem;}
+.step p{font-size:0.875rem;font-weight:300;line-height:1.7;color:rgba(245,240,232,0.6);}
 
-  /* ── SECTIONS ── */
-  section { padding: 90px 5%; }
-  .section-tag {
-    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 0.75rem;
-  }
-  h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 4vw, 2.8rem);
-    font-weight: 700; line-height: 1.15;
-    color: var(--moss); margin-bottom: 1.2rem;
-  }
-  .section-intro {
-    font-size: 1rem; font-weight: 300; line-height: 1.8;
-    color: var(--text-muted); max-width: 560px;
-  }
+/* FORM SECTION */
+#gethelp{background:var(--paper);}
+.form-layout{display:grid;grid-template-columns:1fr 1.6fr;gap:5rem;align-items:start;}
+.form-intro h2{margin-bottom:1rem;}
+.form-intro p{font-size:1rem;font-weight:300;line-height:1.8;color:var(--text-muted);margin-bottom:1.5rem;}
+.direct-email{display:inline-flex;align-items:center;gap:8px;color:var(--moss);font-weight:500;font-size:0.9rem;text-decoration:none;border-bottom:1px solid var(--gold);}
+.direct-email:hover{color:var(--gold);}
 
-  /* ── SERVICES ── */
-  #services { background: var(--cream); }
-  .services-header { margin-bottom: 4rem; }
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-  }
-  .service-card {
-    background: #fff;
-    border: 1px solid var(--gold-light);
-    border-radius: 6px;
-    padding: 2.2rem;
-    position: relative;
-    transition: box-shadow 0.2s, transform 0.2s;
-    overflow: hidden;
-  }
-  .service-card::after {
-    content: '';
-    position: absolute; bottom: 0; left: 0; right: 0;
-    height: 3px; background: var(--gold);
-    transform: scaleX(0); transform-origin: left;
-    transition: transform 0.3s;
-  }
-  .service-card:hover { box-shadow: 0 8px 32px rgba(15,26,20,0.08); transform: translateY(-3px); }
-  .service-card:hover::after { transform: scaleX(1); }
-  .service-icon {
-    width: 48px; height: 48px;
-    background: var(--moss-light);
-    border-radius: 6px;
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 1.4rem;
-  }
-  .service-icon svg { width: 24px; height: 24px; }
-  .service-card h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.25rem; font-weight: 600;
-    color: var(--moss); margin-bottom: 0.75rem;
-  }
-  .service-card p {
-    font-size: 0.925rem; font-weight: 300; line-height: 1.75;
-    color: var(--text-muted); margin-bottom: 1.4rem;
-  }
-  .service-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
-  .tag {
-    background: var(--moss-light); color: var(--moss-mid);
-    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.04em;
-    padding: 4px 10px; border-radius: 2px;
-  }
+/* FORM CARD */
+.form-card{background:#fff;border:1px solid var(--gold-light);border-radius:8px;overflow:hidden;box-shadow:0 4px 24px rgba(15,26,20,0.06);}
 
-  /* ── HOW IT WORKS ── */
-  #process { background: var(--moss); }
-  #process h2 { color: var(--paper); }
-  #process .section-intro { color: rgba(245,240,232,0.65); }
-  .steps-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 0;
-    margin-top: 3.5rem;
-    border: 1px solid rgba(184,144,42,0.2);
-    border-radius: 6px;
-    overflow: hidden;
-  }
-  .step {
-    padding: 2.2rem;
-    border-right: 1px solid rgba(184,144,42,0.2);
-    position: relative;
-  }
-  .step:last-child { border-right: none; }
-  .step-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 3rem; font-weight: 700;
-    color: rgba(184,144,42,0.2);
-    line-height: 1; margin-bottom: 1rem;
-  }
-  .step h4 {
-    font-size: 1rem; font-weight: 600;
-    color: var(--gold-light); margin-bottom: 0.6rem;
-  }
-  .step p {
-    font-size: 0.875rem; font-weight: 300; line-height: 1.7;
-    color: rgba(245,240,232,0.6);
-  }
+/* PROGRESS */
+.form-progress{background:var(--moss-light);padding:1rem 1.5rem;display:flex;align-items:center;gap:0.5rem;}
+.progress-step{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:600;border:2px solid #ccc;background:#fff;color:var(--text-muted);transition:all 0.3s;flex-shrink:0;}
+.progress-step.active{background:var(--moss);color:#fff;border-color:var(--moss);}
+.progress-step.done{background:var(--gold);color:var(--moss);border-color:var(--gold);}
+.progress-line{flex:1;height:2px;background:var(--gold-light);border-radius:1px;transition:background 0.3s;}
+.progress-line.done{background:var(--gold);}
 
-  /* ── QR SECTION ── */
-  #contact { background: var(--paper); }
-  .contact-layout {
-    display: grid;
-    grid-template-columns: 1fr 400px;
-    gap: 5rem;
-    align-items: center;
-  }
-  .contact-text h2 { margin-bottom: 1rem; }
-  .contact-text p {
-    font-size: 1rem; font-weight: 300; line-height: 1.8;
-    color: var(--text-muted); margin-bottom: 2rem;
-  }
-  .email-link {
-    display: inline-flex; align-items: center; gap: 10px;
-    background: var(--moss);
-    color: var(--paper);
-    padding: 0.9rem 1.8rem;
-    border-radius: 4px;
-    font-weight: 500; text-decoration: none;
-    font-size: 0.95rem;
-    transition: background 0.15s;
-  }
-  .email-link:hover { background: var(--moss-mid); }
-  .qr-card {
-    background: #fff;
-    border: 1px solid var(--gold-light);
-    border-radius: 8px;
-    padding: 2.5rem;
-    text-align: center;
-    box-shadow: 0 4px 24px rgba(15,26,20,0.06);
-  }
-  .qr-label {
-    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
-    color: var(--text-muted); margin-bottom: 1.5rem;
-  }
-  .qr-wrapper {
-    width: 200px; height: 200px;
-    margin: 0 auto 1.5rem;
-    border: 3px solid var(--moss);
-    border-radius: 6px;
-    overflow: hidden;
-    position: relative;
-  }
-  .qr-wrapper img { width: 100%; height: 100%; display: block; }
-  .qr-caption {
-    font-size: 0.825rem; color: var(--text-muted); line-height: 1.6;
-  }
-  .qr-caption strong { color: var(--moss); font-weight: 600; }
-  .print-btn {
-    margin-top: 1.2rem;
-    background: transparent;
-    border: 1px solid var(--gold-light);
-    color: var(--moss);
-    padding: 0.55rem 1.2rem;
-    border-radius: 4px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.825rem; font-weight: 500;
-    cursor: pointer;
-    transition: background 0.15s, border-color 0.15s;
-  }
-  .print-btn:hover { background: var(--moss-light); border-color: var(--moss); }
+/* STEPS */
+.form-step{display:none;padding:1.8rem 2rem;}
+.form-step.active{display:block;animation:fadeUp 0.3s ease both;}
+.step-title{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:600;color:var(--moss);margin-bottom:0.3rem;}
+.step-sub{font-size:0.84rem;color:var(--text-muted);margin-bottom:1.3rem;}
 
-  /* ── FOOTER ── */
-  footer {
-    background: var(--ink);
-    color: rgba(245,240,232,0.5);
-    text-align: center;
-    padding: 2rem 5%;
-    font-size: 0.825rem; font-weight: 300;
-  }
-  footer strong { color: var(--gold); font-weight: 500; }
+/* CHOICE BUTTONS */
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:0.55rem;margin-bottom:1rem;}
+.choices.cols1{grid-template-columns:1fr;}
+.choice-btn{background:#fff;border:1.5px solid var(--gold-light);border-radius:6px;padding:0.7rem 0.9rem;font-family:'DM Sans',sans-serif;font-size:0.85rem;font-weight:400;color:var(--ink);cursor:pointer;text-align:left;transition:all 0.15s;display:flex;align-items:center;gap:9px;line-height:1.3;}
+.choice-btn:hover{border-color:var(--moss);background:var(--moss-light);}
+.choice-btn.selected{border-color:var(--moss);background:var(--moss);color:#fff;}
 
-  /* ── ANIMATIONS ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(18px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
+/* INPUTS */
+.field{margin-bottom:1.1rem;}
+.field label{display:block;font-size:0.78rem;font-weight:500;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.35rem;}
+.field input,.field textarea{width:100%;background:#faf7f1;border:1.5px solid var(--gold-light);border-radius:5px;padding:0.65rem 0.9rem;font-family:'DM Sans',sans-serif;font-size:0.9rem;color:var(--ink);transition:border-color 0.15s;outline:none;}
+.field input:focus,.field textarea:focus{border-color:var(--moss);}
+.field textarea{resize:vertical;min-height:85px;line-height:1.6;}
 
-  /* ── RESPONSIVE ── */
-  @media (max-width: 768px) {
-    .nav-links { display: none; }
-    .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
-    .steps-grid { grid-template-columns: 1fr 1fr; }
-    .step { border-right: none; border-bottom: 1px solid rgba(184,144,42,0.2); }
-    .step:last-child { border-bottom: none; }
-    .stats-strip { gap: 2rem; }
-  }
+/* FORM NAV */
+.form-nav{display:flex;justify-content:space-between;align-items:center;padding:1rem 1.5rem;border-top:1px solid var(--gold-light);background:var(--moss-light);}
+.btn-back{background:transparent;color:var(--text-muted);border:1px solid var(--gold-light);padding:0.65rem 1.3rem;border-radius:4px;font-family:'DM Sans',sans-serif;font-size:0.875rem;cursor:pointer;transition:all 0.15s;}
+.btn-back:hover{border-color:var(--moss);color:var(--moss);}
+.btn-next{background:var(--moss);color:#fff;border:none;padding:0.65rem 1.6rem;border-radius:4px;font-family:'DM Sans',sans-serif;font-size:0.875rem;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:7px;transition:background 0.15s;}
+.btn-next:hover{background:var(--moss-mid);}
+.btn-submit{background:var(--gold);color:var(--moss);border:none;padding:0.65rem 1.6rem;border-radius:4px;font-family:'DM Sans',sans-serif;font-size:0.875rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:7px;transition:background 0.15s;}
+.btn-submit:hover{background:#cfa036;}
+
+/* SUCCESS */
+.success-msg{display:none;padding:3rem 2rem;text-align:center;}
+.tick{width:56px;height:56px;background:var(--moss-light);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.2rem;}
+.success-msg h3{font-family:'Playfair Display',serif;color:var(--moss);font-size:1.4rem;margin-bottom:0.6rem;}
+.success-msg p{font-size:0.9rem;color:var(--text-muted);line-height:1.7;}
+
+/* FOOTER */
+footer{background:var(--ink);color:rgba(245,240,232,0.5);text-align:center;padding:2rem 5%;font-size:0.825rem;font-weight:300;}
+footer strong{color:var(--gold);font-weight:500;}
+footer a{color:var(--gold);text-decoration:none;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+
+@media(max-width:768px){
+  .nav-links{display:none;}
+  .form-layout{grid-template-columns:1fr;gap:2.5rem;}
+  .choices{grid-template-columns:1fr;}
+  .steps-grid{grid-template-columns:1fr 1fr;}
+  .step{border-right:none;border-bottom:1px solid rgba(184,144,42,0.2);}
+  .step:last-child{border-bottom:none;}
+  .stats-strip{gap:2rem;}
+}
 </style>
 </head>
 <body>
@@ -350,7 +158,7 @@
   <ul class="nav-links">
     <li><a href="#services">Services</a></li>
     <li><a href="#process">How It Works</a></li>
-    <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
+    <li><a href="#gethelp" class="nav-cta">Get Help Now</a></li>
   </ul>
 </nav>
 
@@ -360,37 +168,23 @@
   <div class="hero-content">
     <div class="hero-badge">Postgraduate Research Support</div>
     <h1>Where your data finds its <em>true direction.</em></h1>
-    <p class="hero-sub">
-      Professional GIS mapping, spatial analysis, and precision-crafted research aims &amp; objectives — built on your data, tailored to your study.
-    </p>
+    <p class="hero-sub">Professional GIS mapping, spatial analysis, and precision-crafted research aims &amp; objectives — built on your data, tailored to your study.</p>
     <div class="hero-actions">
-      <a href="#contact" class="btn-primary">
-        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-        Request a Quote
+      <a href="#gethelp" class="btn-primary">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+        Tell Us Your Challenge
       </a>
       <a href="#services" class="btn-ghost">See Our Services</a>
     </div>
   </div>
 </section>
 
-<!-- STATS STRIP -->
+<!-- STATS -->
 <div class="stats-strip">
-  <div class="stat-item">
-    <div class="stat-num">48hr</div>
-    <div class="stat-label">Turnaround</div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-num">100%</div>
-    <div class="stat-label">Data-Driven</div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-num">All</div>
-    <div class="stat-label">Disciplines Welcome</div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-num">Free</div>
-    <div class="stat-label">Initial Consultation</div>
-  </div>
+  <div class="stat-item"><div class="stat-num">48hr</div><div class="stat-label">Turnaround</div></div>
+  <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">Data-Driven</div></div>
+  <div class="stat-item"><div class="stat-num">All</div><div class="stat-label">Disciplines Welcome</div></div>
+  <div class="stat-item"><div class="stat-num">Free</div><div class="stat-label">Initial Consultation</div></div>
 </div>
 
 <!-- SERVICES -->
@@ -401,115 +195,159 @@
     <p class="section-intro">From GIS maps to clearly articulated research frameworks — we handle the technical so you can focus on the intellectual.</p>
   </div>
   <div class="services-grid">
-
-    <!-- Service 1 -->
     <div class="service-card">
-      <div class="service-icon">
-        <svg fill="none" viewBox="0 0 24 24" stroke="#1c3d2a" stroke-width="1.8">
-          <path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/>
-        </svg>
-      </div>
+      <div class="service-icon"><svg fill="none" viewBox="0 0 24 24" stroke="#1c3d2a" stroke-width="1.8"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg></div>
       <h3>Professional GIS Maps</h3>
-      <p>High-quality, publication-ready maps produced from your dataset. Spatial visualisation, thematic mapping, and cartographic design for dissertations, papers, and reports.</p>
-      <div class="service-tags">
-        <span class="tag">GIS / QGIS</span>
-        <span class="tag">Thematic Maps</span>
-        <span class="tag">Spatial Analysis</span>
-        <span class="tag">Print-Ready</span>
-      </div>
+      <p>High-quality, publication-ready maps produced from your dataset. Spatial visualisation, thematic mapping, and cartographic design for dissertations and reports.</p>
+      <div class="service-tags"><span class="tag">GIS / QGIS</span><span class="tag">Thematic Maps</span><span class="tag">Spatial Analysis</span><span class="tag">Print-Ready</span></div>
     </div>
-
-    <!-- Service 2 -->
     <div class="service-card">
-      <div class="service-icon">
-        <svg fill="none" viewBox="0 0 24 24" stroke="#1c3d2a" stroke-width="1.8">
-          <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-        </svg>
-      </div>
+      <div class="service-icon"><svg fill="none" viewBox="0 0 24 24" stroke="#1c3d2a" stroke-width="1.8"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></div>
       <h3>Research Aims &amp; Objectives</h3>
-      <p>Structured, academically rigorous aims and objectives drafted directly from your data and research context — aligned with your methodology and supervisor expectations.</p>
-      <div class="service-tags">
-        <span class="tag">Dissertation</span>
-        <span class="tag">Thesis</span>
-        <span class="tag">Research Papers</span>
-        <span class="tag">Proposals</span>
-      </div>
+      <p>Structured, academically rigorous aims and objectives drafted from your data and research context — aligned with your methodology and supervisor expectations.</p>
+      <div class="service-tags"><span class="tag">Dissertation</span><span class="tag">Thesis</span><span class="tag">Research Papers</span><span class="tag">Proposals</span></div>
     </div>
-
-    <!-- Service 3 -->
     <div class="service-card">
-      <div class="service-icon">
-        <svg fill="none" viewBox="0 0 24 24" stroke="#1c3d2a" stroke-width="1.8">
-          <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
-        </svg>
-      </div>
+      <div class="service-icon"><svg fill="none" viewBox="0 0 24 24" stroke="#1c3d2a" stroke-width="1.8"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg></div>
       <h3>Data Visualisation &amp; Interpretation</h3>
       <p>Transform raw datasets into clear charts, diagrams, and written interpretation sections. Ideal for quantitative and mixed-methods postgrad research.</p>
-      <div class="service-tags">
-        <span class="tag">Charts &amp; Graphs</span>
-        <span class="tag">Statistical Summary</span>
-        <span class="tag">Infographics</span>
-      </div>
+      <div class="service-tags"><span class="tag">Charts &amp; Graphs</span><span class="tag">Statistical Summary</span><span class="tag">Infographics</span></div>
     </div>
-
   </div>
 </section>
 
 <!-- PROCESS -->
 <section id="process">
-  <p class="section-tag" style="color: var(--gold-light);">Simple Process</p>
+  <p class="section-tag" style="color:var(--gold-light);">Simple Process</p>
   <h2>Three steps to a polished deliverable.</h2>
   <p class="section-intro">No lengthy back-and-forth. Just clean, fast, professional outputs.</p>
   <div class="steps-grid">
-    <div class="step">
-      <div class="step-num">01</div>
-      <h4>Send Your Data</h4>
-      <p>Email us your dataset, research context, and any supervisor guidelines. The more detail, the better.</p>
-    </div>
-    <div class="step">
-      <div class="step-num">02</div>
-      <h4>We Consult &amp; Draft</h4>
-      <p>We review your brief, clarify any questions, and begin crafting your maps or research framework.</p>
-    </div>
-    <div class="step">
-      <div class="step-num">03</div>
-      <h4>Receive &amp; Revise</h4>
-      <p>Your deliverable arrives within 48 hours. One free revision included on every order.</p>
-    </div>
-    <div class="step">
-      <div class="step-num">04</div>
-      <h4>Submit with Confidence</h4>
-      <p>Walk into your submission or presentation with professionally crafted, data-backed work.</p>
-    </div>
+    <div class="step"><div class="step-num">01</div><h4>Tell Us Your Challenge</h4><p>Fill in the quick form below — takes under 2 minutes.</p></div>
+    <div class="step"><div class="step-num">02</div><h4>We Consult &amp; Draft</h4><p>We review your brief, clarify questions, and begin crafting your deliverable.</p></div>
+    <div class="step"><div class="step-num">03</div><h4>Receive &amp; Revise</h4><p>Your work arrives within 48 hours. One free revision included.</p></div>
+    <div class="step"><div class="step-num">04</div><h4>Submit with Confidence</h4><p>Walk into your submission with professionally crafted, data-backed work.</p></div>
   </div>
 </section>
 
-<!-- CONTACT / QR -->
-<section id="contact">
-  <div class="contact-layout">
-    <div class="contact-text">
-      <p class="section-tag">Get in Touch</p>
-      <h2>Ready to elevate your research?</h2>
-      <p>Send us your dataset and brief — we'll get back to you within 24 hours with a quote and timeline. Initial consultations are always free.</p>
-      <a href="mailto:finsorca@gmail.com?subject=MapMind%20Academic%20Services%20%E2%80%93%20Enquiry&body=Hello%20MapMind%20Team%2C%0A%0AI%20am%20a%20postgraduate%20student%20and%20I%20would%20like%20to%20enquire%20about%3A%0A%0A-%20Service%20needed%3A%0A-%20University%20%2F%20Institution%3A%0A-%20Deadline%3A%0A-%20Brief%20description%3A%0A%0AKind%20regards%2C" class="email-link">
-        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-        </svg>
-        Email Us Directly
+<!-- INTAKE FORM -->
+<section id="gethelp">
+  <div class="form-layout">
+
+    <div class="form-intro">
+      <p class="section-tag">Get Help Now</p>
+      <h2>Tell us what you're struggling with.</h2>
+      <p>Answer 4 quick questions — no long emails needed. We'll get back to you within 24 hours with a plan and a quote. Initial consultation is always free.</p>
+      <a href="mailto:finsorca@gmail.com?subject=MapMind Enquiry" class="direct-email">
+        <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        Or email us directly — finsorca@gmail.com
       </a>
     </div>
 
-    <div class="qr-card">
-      <p class="qr-label">Scan to Email Us</p>
-      <div class="qr-wrapper">
-        <img id="qrimg"
-          src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&color=1c3d2a&bgcolor=ffffff&data=mailto:finsorca%40gmail.com%3Fsubject%3DMapMind%2520Enquiry"
-          alt="QR code to email MapMind Academic Services"/>
+    <div class="form-card">
+      <!-- Progress -->
+      <div class="form-progress">
+        <div class="progress-step active" id="ps1">1</div>
+        <div class="progress-line" id="pl1"></div>
+        <div class="progress-step" id="ps2">2</div>
+        <div class="progress-line" id="pl2"></div>
+        <div class="progress-step" id="ps3">3</div>
+        <div class="progress-line" id="pl3"></div>
+        <div class="progress-step" id="ps4">4</div>
       </div>
-      <p class="qr-caption">
-        Point your phone camera at this code<br>to open a <strong>pre-filled email</strong> straight to us.
-      </p>
-      <button class="print-btn" onclick="window.print()">🖨 Print This QR Code</button>
+
+      <!-- STEP 1: Service needed -->
+      <div class="form-step active" id="step1">
+        <p class="step-title">What do you need help with?</p>
+        <p class="step-sub">Select all that apply — you can choose more than one</p>
+        <div class="choices cols1" id="grp-service">
+          <button type="button" class="choice-btn multi" data-val="GIS Maps &amp; Spatial Analysis">🗺️ &nbsp;GIS Maps &amp; Spatial Analysis</button>
+          <button type="button" class="choice-btn multi" data-val="Research Aims &amp; Objectives">📋 &nbsp;Research Aims &amp; Objectives</button>
+          <button type="button" class="choice-btn multi" data-val="Data Visualisation &amp; Charts">📊 &nbsp;Data Visualisation &amp; Charts</button>
+          <button type="button" class="choice-btn multi" data-val="Data Interpretation / Write-up">✍️ &nbsp;Data Interpretation / Write-up</button>
+          <button type="button" class="choice-btn multi" data-val="Research Proposal">📝 &nbsp;Research Proposal</button>
+          <button type="button" class="choice-btn multi" data-val="Not sure – need advice first">💬 &nbsp;Not sure — I just need advice</button>
+        </div>
+      </div>
+
+      <!-- STEP 2: Study level & deadline -->
+      <div class="form-step" id="step2">
+        <p class="step-title">About your study</p>
+        <p class="step-sub">Helps us match the right academic level and urgency</p>
+        <div class="choices" id="grp-level">
+          <button type="button" class="choice-btn single" data-val="Honours">🎓 Honours</button>
+          <button type="button" class="choice-btn single" data-val="Masters">🎓 Masters</button>
+          <button type="button" class="choice-btn single" data-val="PhD / Doctorate">🎓 PhD / Doctorate</button>
+          <button type="button" class="choice-btn single" data-val="Undergraduate">📚 Undergraduate</button>
+        </div>
+        <div class="field" style="margin-top:1rem;">
+          <label>Submission / Deadline Date</label>
+          <input type="date" id="f-deadline"/>
+        </div>
+        <div class="field">
+          <label>Field of Study / Discipline</label>
+          <input type="text" id="f-discipline" placeholder="e.g. Geography, Public Health, Environmental Science"/>
+        </div>
+      </div>
+
+      <!-- STEP 3: Challenge description -->
+      <div class="form-step" id="step3">
+        <p class="step-title">Describe your challenge</p>
+        <p class="step-sub">The more you share, the better we can help</p>
+        <div class="field">
+          <label>Your Research Topic or Title</label>
+          <input type="text" id="f-topic" placeholder="e.g. Urban heat islands in Limpopo Province"/>
+        </div>
+        <div class="field">
+          <label>What is your biggest challenge right now?</label>
+          <textarea id="f-challenge" placeholder="e.g. I have GPS data but don't know how to map it. My supervisor wants thematic maps for Chapter 3 by next week..."></textarea>
+        </div>
+        <div class="field">
+          <label>Do you already have data?</label>
+          <div class="choices" id="grp-data" style="margin-top:0.4rem;">
+            <button type="button" class="choice-btn single" data-val="Yes, data is ready">✅ Yes, data ready</button>
+            <button type="button" class="choice-btn single" data-val="Partially collected">⏳ Partially collected</button>
+            <button type="button" class="choice-btn single" data-val="No data yet">❌ No data yet</button>
+            <button type="button" class="choice-btn single" data-val="Not sure">🤷 Not sure</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 4: Contact -->
+      <div class="form-step" id="step4">
+        <p class="step-title">Almost done!</p>
+        <p class="step-sub">Where should we send your quote and response?</p>
+        <div class="field">
+          <label>Your Full Name *</label>
+          <input type="text" id="f-name" placeholder="e.g. Thabo Mokoena"/>
+        </div>
+        <div class="field">
+          <label>Your Email Address *</label>
+          <input type="email" id="f-email" placeholder="e.g. thabo@gmail.com"/>
+        </div>
+        <div class="field">
+          <label>University / Institution</label>
+          <input type="text" id="f-uni" placeholder="e.g. University of Limpopo"/>
+        </div>
+        <div class="field">
+          <label>Anything else? (optional)</label>
+          <textarea id="f-extra" placeholder="Supervisor requirements, budget, format preferences..." style="min-height:65px;"></textarea>
+        </div>
+      </div>
+
+      <!-- SUCCESS -->
+      <div class="success-msg" id="successMsg">
+        <div class="tick">
+          <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="#1c3d2a" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+        </div>
+        <h3>We've received your brief!</h3>
+        <p>Thank you — we'll review your challenge and get back to you at your email within <strong>24 hours</strong> with a quote and next steps.<br><br>Keep an eye on your inbox (and spam folder just in case).</p>
+      </div>
+
+      <!-- NAV BUTTONS -->
+      <div class="form-nav" id="formNav">
+        <button class="btn-back" id="backBtn" onclick="prevStep()" style="visibility:hidden;">← Back</button>
+        <button class="btn-next" id="nextBtn" onclick="nextStep()">Next &nbsp;→</button>
+      </div>
     </div>
 
   </div>
@@ -517,32 +355,120 @@
 
 <!-- FOOTER -->
 <footer>
-  <p>&copy; 2025 <strong>MapMind Academic Services</strong> &nbsp;·&nbsp; Supporting postgraduate research excellence.</p>
+  <p>&copy; 2025 <strong>MapMind Academic Services</strong> &nbsp;·&nbsp; Supporting postgraduate research excellence &nbsp;·&nbsp;
+  <a href="mailto:finsorca@gmail.com">finsorca@gmail.com</a></p>
 </footer>
 
 <script>
-  // Update QR code and mailto links dynamically once email is set
-  const EMAIL = "finsorca@gmail.com";
-  const subject = "MapMind Academic Services – Enquiry";
-  const body = `Hello MapMind Team,\n\nI am a postgraduate student and I would like to enquire about:\n\n- Service needed:\n- University / Institution:\n- Deadline:\n- Brief description:\n\nKind regards,`;
-  const mailtoHref = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+let cur = 1;
+const total = 4;
 
-  document.querySelector('.email-link').href = mailtoHref;
-  document.getElementById('qrimg').src =
-    `https://api.qrserver.com/v1/create-qr-code/?size=200x200&color=1c3d2a&bgcolor=ffffff&data=${encodeURIComponent(mailtoHref)}`;
+// Multi-select toggle
+document.querySelectorAll('.choice-btn.multi').forEach(b =>
+  b.addEventListener('click', () => b.classList.toggle('selected'))
+);
 
-  // Smooth fade-in on scroll
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.style.opacity = 1; e.target.style.transform = 'translateY(0)'; }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.service-card, .step').forEach(el => {
-    el.style.opacity = 0; el.style.transform = 'translateY(20px)';
-    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-    observer.observe(el);
+// Single-select per group
+document.querySelectorAll('.choice-btn.single').forEach(b => {
+  b.addEventListener('click', () => {
+    const grp = b.closest('.choices, [id^="grp"]');
+    grp.querySelectorAll('.choice-btn.single').forEach(x => x.classList.remove('selected'));
+    b.classList.add('selected');
   });
+});
+
+function sel(id) {
+  return [...document.querySelectorAll(`#${id} .choice-btn.selected`)].map(b => b.dataset.val).join(', ') || 'Not specified';
+}
+
+function updateUI() {
+  for (let i = 1; i <= total; i++) {
+    const ps = document.getElementById(`ps${i}`);
+    if (i < cur)      { ps.className = 'progress-step done'; ps.textContent = '✓'; }
+    else if (i === cur){ ps.className = 'progress-step active'; ps.textContent = i; }
+    else               { ps.className = 'progress-step'; ps.textContent = i; }
+    if (i < total) document.getElementById(`pl${i}`).className = i < cur ? 'progress-line done' : 'progress-line';
+  }
+  document.getElementById('backBtn').style.visibility = cur > 1 ? 'visible' : 'hidden';
+  const nb = document.getElementById('nextBtn');
+  if (cur === total) {
+    nb.className = 'btn-submit'; nb.textContent = '✉️  Send My Brief';
+    nb.onclick = submitForm;
+  } else {
+    nb.className = 'btn-next'; nb.textContent = 'Next  →';
+    nb.onclick = nextStep;
+  }
+}
+
+function nextStep() {
+  document.getElementById(`step${cur}`).classList.remove('active');
+  cur++;
+  document.getElementById(`step${cur}`).classList.add('active');
+  updateUI();
+}
+
+function prevStep() {
+  document.getElementById(`step${cur}`).classList.remove('active');
+  cur--;
+  document.getElementById(`step${cur}`).classList.add('active');
+  updateUI();
+}
+
+function submitForm() {
+  const name  = document.getElementById('f-name').value.trim();
+  const email = document.getElementById('f-email').value.trim();
+  if (!name || !email) { alert('Please enter your name and email address so we can get back to you.'); return; }
+
+  const subject = `MapMind Enquiry – ${name} (${sel('grp-level')})`;
+  const body =
+`New Student Enquiry – MapMind Academic Services
+================================================
+Name:         ${name}
+Email:        ${email}
+University:   ${document.getElementById('f-uni').value || 'Not specified'}
+Study Level:  ${sel('grp-level')}
+Discipline:   ${document.getElementById('f-discipline').value || 'Not specified'}
+Deadline:     ${document.getElementById('f-deadline').value || 'Not specified'}
+
+SERVICES NEEDED:
+${sel('grp-service')}
+
+RESEARCH TOPIC:
+${document.getElementById('f-topic').value || 'Not specified'}
+
+MAIN CHALLENGE:
+${document.getElementById('f-challenge').value || 'Not specified'}
+
+DATA STATUS:
+${sel('grp-data')}
+
+ADDITIONAL NOTES:
+${document.getElementById('f-extra').value || 'None'}
+
+================================================
+Submitted via MapMind Academic Services website`;
+
+  window.location.href = `mailto:finsorca@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+  for (let i = 1; i <= total; i++) {
+    const s = document.getElementById(`step${i}`);
+    if (s) s.style.display = 'none';
+    const ps = document.getElementById(`ps${i}`);
+    ps.className = 'progress-step done'; ps.textContent = '✓';
+    if (i < total) document.getElementById(`pl${i}`).className = 'progress-line done';
+  }
+  document.getElementById('successMsg').style.display = 'block';
+  document.getElementById('formNav').style.display = 'none';
+}
+
+// Scroll fade
+const obs = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) { e.target.style.opacity=1; e.target.style.transform='translateY(0)'; }
+}), {threshold:0.1});
+document.querySelectorAll('.service-card,.step').forEach(el => {
+  el.style.cssText += 'opacity:0;transform:translateY(20px);transition:opacity 0.5s ease,transform 0.5s ease;';
+  obs.observe(el);
+});
 </script>
 </body>
 </html>
