@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>MapMind Academic Services</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0f1a14;
+    --paper: #f5f0e8;
+    --gold: #b8902a;
+    --gold-light: #e8d5a0;
+    --moss: #1c3d2a;
+    --moss-mid: #2e5c40;
+    --moss-light: #e8f0eb;
+    --cream: #faf7f1;
+    --text-muted: #5a6b5f;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(245,240,232,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--gold-light);
+    padding: 0 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem; font-weight: 700;
+    color: var(--moss);
+    letter-spacing: -0.01em;
+  }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.875rem; font-weight: 500;
+    color: var(--text-muted); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--moss); }
+  .nav-cta {
+    background: var(--moss);
+    color: #fff !important;
+    padding: 0.45rem 1.1rem;
+    border-radius: 4px;
+    font-weight: 500 !important;
+  }
+  .nav-cta:hover { background: var(--moss-mid); color: #fff !important; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: var(--moss);
+    display: flex; align-items: center;
+    padding: 100px 5% 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 80% at 80% 50%, rgba(184,144,42,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 60% at 10% 80%, rgba(255,255,255,0.04) 0%, transparent 50%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0; opacity: 0.04;
+    background-image: linear-gradient(var(--gold) 1px, transparent 1px), linear-gradient(90deg, var(--gold) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-content { position: relative; max-width: 680px; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(184,144,42,0.15);
+    border: 1px solid rgba(184,144,42,0.3);
+    color: var(--gold-light);
+    font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 6px 14px; border-radius: 2px;
+    margin-bottom: 1.8rem;
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-badge::before { content: '●'; font-size: 8px; }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 6vw, 4.5rem);
+    font-weight: 700; line-height: 1.08;
+    color: var(--paper);
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+  h1 em { color: var(--gold); font-style: normal; }
+  .hero-sub {
+    font-size: 1.1rem; font-weight: 300; line-height: 1.75;
+    color: rgba(245,240,232,0.75);
+    max-width: 520px;
+    margin-bottom: 2.5rem;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+  .hero-actions {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+  .btn-primary {
+    background: var(--gold);
+    color: var(--moss);
+    padding: 0.85rem 2rem;
+    border-radius: 4px;
+    font-weight: 600; font-size: 0.95rem;
+    text-decoration: none;
+    transition: transform 0.15s, background 0.15s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary:hover { background: #cfa036; transform: translateY(-1px); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--paper);
+    border: 1px solid rgba(245,240,232,0.35);
+    padding: 0.85rem 2rem;
+    border-radius: 4px;
+    font-weight: 400; font-size: 0.95rem;
+    text-decoration: none;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .btn-ghost:hover { border-color: var(--gold-light); background: rgba(255,255,255,0.05); }
+
+  /* ── STATS STRIP ── */
+  .stats-strip {
+    background: var(--gold);
+    padding: 1.2rem 5%;
+    display: flex; justify-content: center; gap: 4rem; flex-wrap: wrap;
+  }
+  .stat-item { text-align: center; }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem; font-weight: 700; color: var(--moss);
+  }
+  .stat-label { font-size: 0.78rem; font-weight: 500; color: rgba(15,26,20,0.65); text-transform: uppercase; letter-spacing: 0.06em; }
+
+  /* ── SECTIONS ── */
+  section { padding: 90px 5%; }
+  .section-tag {
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.75rem;
+  }
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 700; line-height: 1.15;
+    color: var(--moss); margin-bottom: 1.2rem;
+  }
+  .section-intro {
+    font-size: 1rem; font-weight: 300; line-height: 1.8;
+    color: var(--text-muted); max-width: 560px;
+  }
+
+  /* ── SERVICES ── */
+  #services { background: var(--cream); }
+  .services-header { margin-bottom: 4rem; }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  .service-card {
+    background: #fff;
+    border: 1px solid var(--gold-light);
+    border-radius: 6px;
+    padding: 2.2rem;
+    position: relative;
+    transition: box-shadow 0.2s, transform 0.2s;
+    overflow: hidden;
+  }
+  .service-card::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 3px; background: var(--gold);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .service-card:hover { box-shadow: 0 8px 32px rgba(15,26,20,0.08); transform: translateY(-3px); }
+  .service-card:hover::after { transform: scaleX(1); }
+  .service-icon {
+    width: 48px; height: 48px;
+    background: var(--moss-light);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.4rem;
+  }
+  .service-icon svg { width: 24px; height: 24px; }
+  .service-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem; font-weight: 600;
+    color: var(--moss); margin-bottom: 0.75rem;
+  }
+  .service-card p {
+    font-size: 0.925rem; font-weight: 300; line-height: 1.75;
+    color: var(--text-muted); margin-bottom: 1.4rem;
+  }
+  .service-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .tag {
+    background: var(--moss-light); color: var(--moss-mid);
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.04em;
+    padding: 4px 10px; border-radius: 2px;
+  }
+
+  /* ── HOW IT WORKS ── */
+  #process { background: var(--moss); }
+  #process h2 { color: var(--paper); }
+  #process .section-intro { color: rgba(245,240,232,0.65); }
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0;
+    margin-top: 3.5rem;
+    border: 1px solid rgba(184,144,42,0.2);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .step {
+    padding: 2.2rem;
+    border-right: 1px solid rgba(184,144,42,0.2);
+    position: relative;
+  }
+  .step:last-child { border-right: none; }
+  .step-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem; font-weight: 700;
+    color: rgba(184,144,42,0.2);
+    line-height: 1; margin-bottom: 1rem;
+  }
+  .step h4 {
+    font-size: 1rem; font-weight: 600;
+    color: var(--gold-light); margin-bottom: 0.6rem;
+  }
+  .step p {
+    font-size: 0.875rem; font-weight: 300; line-height: 1.7;
+    color: rgba(245,240,232,0.6);
+  }
+
+  /* ── QR SECTION ── */
+  #contact { background: var(--paper); }
+  .contact-layout {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 5rem;
+    align-items: center;
+  }
+  .contact-text h2 { margin-bottom: 1rem; }
+  .contact-text p {
+    font-size: 1rem; font-weight: 300; line-height: 1.8;
+    color: var(--text-muted); margin-bottom: 2rem;
+  }
+  .email-link {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--moss);
+    color: var(--paper);
+    padding: 0.9rem 1.8rem;
+    border-radius: 4px;
+    font-weight: 500; text-decoration: none;
+    font-size: 0.95rem;
+    transition: background 0.15s;
+  }
+  .email-link:hover { background: var(--moss-mid); }
+  .qr-card {
+    background: #fff;
+    border: 1px solid var(--gold-light);
+    border-radius: 8px;
+    padding: 2.5rem;
+    text-align: center;
+    box-shadow: 0 4px 24px rgba(15,26,20,0.06);
+  }
+  .qr-label {
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--text-muted); margin-bottom: 1.5rem;
+  }
+  .qr-wrapper {
+    width: 200px; height: 200px;
+    margin: 0 auto 1.5rem;
+    border: 3px solid var(--moss);
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+  }
+  .qr-wrapper img { width: 100%; height: 100%; display: block; }
+  .qr-caption {
+    font-size: 0.825rem; color: var(--text-muted); line-height: 1.6;
+  }
+  .qr-caption strong { color: var(--moss); font-weight: 600; }
+  .print-btn {
+    margin-top: 1.2rem;
+    background: transparent;
+    border: 1px solid var(--gold-light);
+    color: var(--moss);
+    padding: 0.55rem 1.2rem;
+    border-radius: 4px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.825rem; font-weight: 500;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .print-btn:hover { background: var(--moss-light); border-color: var(--moss); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    color: rgba(245,240,232,0.5);
+    text-align: center;
+    padding: 2rem 5%;
+    font-size: 0.825rem; font-weight: 300;
+  }
+  footer strong { color: var(--gold); font-weight: 500; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
+    .steps-grid { grid-template-columns: 1fr 1fr; }
+    .step { border-right: none; border-bottom: 1px solid rgba(184,144,42,0.2); }
+    .step:last-child { border-bottom: none; }
+    .stats-strip { gap: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Map<span>Mind</span> Academic</div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#process">How It Works</a></li>
+    <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Postgraduate Research Support</div>
+    <h1>Where your data finds its <em>true direction.</em></h1>
+    <p class="hero-sub">
+      Professional GIS mapping, spatial analysis, and precision-crafted research aims &amp; objectives — built on your data, tailored to your study.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        Request a Quote
+      </a>
+      <a href="#services" class="btn-ghost">See Our Services</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS STRIP -->
+<div class="stats-strip">
+  <div class="stat-item">
+    <div class="stat-num">48hr</div>
+    <div class="stat-label">Turnaround</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">100%</div>
+    <div class="stat-label">Data-Driven</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">All</div>
+    <div class="stat-label">Disciplines Welcome</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">Free</div>
+    <div class="stat-label">Initial Consultation</div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-header">
+    <p class="section-tag">What We Offer</p>
+    <h2>Research support, precisely delivered.</h2>
+    <p class="section-intro">From GIS maps to clearly articulated research frameworks — we handle the technical so you can focus on the intellectual.</p>
+  </div>
+  <div class="services-grid">
+
+    <!-- Service 1 -->
+    <div class="service-card">
+      <div class="service-icon">
+        <svg fill="none" viewBox="0 0 24 24" stroke="#1c3d2a" stroke-width="1.8">
+          <path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/>
+        </svg>
+      </div>
+      <h3>Professional GIS Maps</h3>
+      <p>High-quality, publication-ready maps produced from your dataset. Spatial visualisation, thematic mapping, and cartographic design for dissertations, papers, and reports.</p>
+      <div class="service-tags">
+        <span class="tag">GIS / QGIS</span>
+        <span class="tag">Thematic Maps</span>
+        <span class="tag">Spatial Analysis</span>
+        <span class="tag">Print-Ready</span>
+      </div>
+    </div>
+
+    <!-- Service 2 -->
+    <div class="service-card">
+      <div class="service-icon">
+        <svg fill="none" viewBox="0 0 24 24" stroke="#1c3d2a" stroke-width="1.8">
+          <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+        </svg>
+      </div>
+      <h3>Research Aims &amp; Objectives</h3>
+      <p>Structured, academically rigorous aims and objectives drafted directly from your data and research context — aligned with your methodology and supervisor expectations.</p>
+      <div class="service-tags">
+        <span class="tag">Dissertation</span>
+        <span class="tag">Thesis</span>
+        <span class="tag">Research Papers</span>
+        <span class="tag">Proposals</span>
+      </div>
+    </div>
+
+    <!-- Service 3 -->
+    <div class="service-card">
+      <div class="service-icon">
+        <svg fill="none" viewBox="0 0 24 24" stroke="#1c3d2a" stroke-width="1.8">
+          <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+        </svg>
+      </div>
+      <h3>Data Visualisation &amp; Interpretation</h3>
+      <p>Transform raw datasets into clear charts, diagrams, and written interpretation sections. Ideal for quantitative and mixed-methods postgrad research.</p>
+      <div class="service-tags">
+        <span class="tag">Charts &amp; Graphs</span>
+        <span class="tag">Statistical Summary</span>
+        <span class="tag">Infographics</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <p class="section-tag" style="color: var(--gold-light);">Simple Process</p>
+  <h2>Three steps to a polished deliverable.</h2>
+  <p class="section-intro">No lengthy back-and-forth. Just clean, fast, professional outputs.</p>
+  <div class="steps-grid">
+    <div class="step">
+      <div class="step-num">01</div>
+      <h4>Send Your Data</h4>
+      <p>Email us your dataset, research context, and any supervisor guidelines. The more detail, the better.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <h4>We Consult &amp; Draft</h4>
+      <p>We review your brief, clarify any questions, and begin crafting your maps or research framework.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <h4>Receive &amp; Revise</h4>
+      <p>Your deliverable arrives within 48 hours. One free revision included on every order.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <h4>Submit with Confidence</h4>
+      <p>Walk into your submission or presentation with professionally crafted, data-backed work.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT / QR -->
+<section id="contact">
+  <div class="contact-layout">
+    <div class="contact-text">
+      <p class="section-tag">Get in Touch</p>
+      <h2>Ready to elevate your research?</h2>
+      <p>Send us your dataset and brief — we'll get back to you within 24 hours with a quote and timeline. Initial consultations are always free.</p>
+      <a href="mailto:finsorca@gmail.com?subject=MapMind%20Academic%20Services%20%E2%80%93%20Enquiry&body=Hello%20MapMind%20Team%2C%0A%0AI%20am%20a%20postgraduate%20student%20and%20I%20would%20like%20to%20enquire%20about%3A%0A%0A-%20Service%20needed%3A%0A-%20University%20%2F%20Institution%3A%0A-%20Deadline%3A%0A-%20Brief%20description%3A%0A%0AKind%20regards%2C" class="email-link">
+        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+        </svg>
+        Email Us Directly
+      </a>
+    </div>
+
+    <div class="qr-card">
+      <p class="qr-label">Scan to Email Us</p>
+      <div class="qr-wrapper">
+        <img id="qrimg"
+          src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&color=1c3d2a&bgcolor=ffffff&data=mailto:finsorca%40gmail.com%3Fsubject%3DMapMind%2520Enquiry"
+          alt="QR code to email MapMind Academic Services"/>
+      </div>
+      <p class="qr-caption">
+        Point your phone camera at this code<br>to open a <strong>pre-filled email</strong> straight to us.
+      </p>
+      <button class="print-btn" onclick="window.print()">🖨 Print This QR Code</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2025 <strong>MapMind Academic Services</strong> &nbsp;·&nbsp; Supporting postgraduate research excellence.</p>
+</footer>
+
+<script>
+  // Update QR code and mailto links dynamically once email is set
+  const EMAIL = "finsorca@gmail.com";
+  const subject = "MapMind Academic Services – Enquiry";
+  const body = `Hello MapMind Team,\n\nI am a postgraduate student and I would like to enquire about:\n\n- Service needed:\n- University / Institution:\n- Deadline:\n- Brief description:\n\nKind regards,`;
+  const mailtoHref = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+  document.querySelector('.email-link').href = mailtoHref;
+  document.getElementById('qrimg').src =
+    `https://api.qrserver.com/v1/create-qr-code/?size=200x200&color=1c3d2a&bgcolor=ffffff&data=${encodeURIComponent(mailtoHref)}`;
+
+  // Smooth fade-in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.style.opacity = 1; e.target.style.transform = 'translateY(0)'; }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.service-card, .step').forEach(el => {
+    el.style.opacity = 0; el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
